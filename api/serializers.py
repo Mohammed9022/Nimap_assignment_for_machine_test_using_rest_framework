@@ -9,6 +9,7 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ('id', 'username', 'email', 'first_name', 'last_name')
 
+
 #Project serializer Class.
 class ProjectSerializer(serializers.ModelSerializer):
     client = serializers.CharField(source='client.client_name', read_only=True)
@@ -17,6 +18,7 @@ class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Project
         fields = ('id', 'project_name', 'client', 'users', 'created_at', 'created_by')
+
 
 # Showing specific models  
 # If we want records from the table so we have run like command otherwise comment them.
@@ -28,7 +30,7 @@ class ListProjectSerializer(serializers.ModelSerializer):
 
 #for client serializer Class
 class ClientSerializer(serializers.ModelSerializer):
-    projects = ProjectSerializer(many=True,write_only=True)
+    projects = ProjectSerializer(many=True,read_only=True)
 
     class Meta:
         model = Client
