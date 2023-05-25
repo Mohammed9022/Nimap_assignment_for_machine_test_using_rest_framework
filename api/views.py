@@ -20,10 +20,8 @@ class ClientCreateView(generics.ListCreateAPIView):
 # API for retrieve all the clients information.
 class ClientInfoView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ClientSerializer
+    queryset = Client.objects.all()
 
-    def get_queryset(self):
-        return Client.objects.all()
-    
 
 #For Edit the client info
 class UpdateClientView(generics.RetrieveUpdateAPIView):
@@ -55,18 +53,16 @@ class ProjectCreateView(generics.CreateAPIView):
         serializer.save(client=client, created_by=self.request.user)
 
 
-# For another way of doing retrieve. 
+# For another way of doing retrieve.
 # class ProjectDetailView(generics.RetrieveAPIView):
 #     queryset = Project.objects.all()
 #     serializer_class = ProjectSerializer
 
 # For project details
 class ProjectDetailView(generics.ListAPIView):
-    serializer_class = ProjectSerializer
-
-    def get_queryset(self):
-        return Project.objects.filter(created_by=self.request.user)
-
+    serializer_class = ListProjectSerializer
+    queryset = Project.objects.all()
+    
 
 # For deatils of projects assigned to the clients.
 class ClientWithProjectDetail(generics.RetrieveAPIView):
@@ -75,9 +71,10 @@ class ClientWithProjectDetail(generics.RetrieveAPIView):
     def get_queryset(self):
         return Client.objects.all()
     
-    def retrieve(self):
+    def retrieve(self,request):
         instance = self.get_object()
         serializer = self.get_serializer(instance)
+        # lookup_field = 'pk'
         projects_serializer = ProjectSerializer(instance.project_set.all(), many=True)
         data = serializer.data
         data['projects'] = projects_serializer.data
