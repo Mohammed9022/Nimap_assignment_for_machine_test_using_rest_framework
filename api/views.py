@@ -1,5 +1,5 @@
 from rest_framework import generics
-from .serializers import UserSerializer,ClientSerializer, ProjectSerializer
+from .serializers import *
 from .models import Client,Project,User
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -53,6 +53,7 @@ class ProjectCreateView(generics.CreateAPIView):
         client_id = self.kwargs.get('client_id') # To fetch client id
         client = Client.objects.get(pk=client_id)
         serializer.save(client=client, created_by=self.request.user)
+
 
 # For another way of doing retrieve. 
 # class ProjectDetailView(generics.RetrieveAPIView):

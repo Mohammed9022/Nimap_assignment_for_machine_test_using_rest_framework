@@ -11,7 +11,7 @@ class UserSerializer(serializers.ModelSerializer):
 
 #Project serializer Class.
 class ProjectSerializer(serializers.ModelSerializer):
-    client = serializers.CharField(source='client.client_name', read_only=True)
+    # client = serializers.CharField(source='client.client_name', read_only=True)
     users = UserSerializer(many=True)
 
     class Meta:
@@ -26,3 +26,4 @@ class ClientSerializer(serializers.ModelSerializer):
     class Meta:
         model = Client
         fields = ('id', 'client_name', 'projects', 'created_at', 'created_by')
+
