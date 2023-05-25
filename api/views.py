@@ -18,7 +18,7 @@ class ClientCreateView(generics.ListCreateAPIView):
 
 
 # API for retrieve all the clients information.
-class ClientInfoView(generics.RetrieveUpdateDestroyAPIView):
+class ClientInfoView(generics.ListAPIView):
     serializer_class = ClientSerializer
     queryset = Client.objects.all()
 
@@ -64,6 +64,12 @@ class ProjectDetailView(generics.ListAPIView):
     # serializer_class = ProjectSerializer # If we want all the records so uncomment this line and run. 
     queryset = Project.objects.all()
     
+    
+#To fetch all the records from the database and List of all projects assigned to the logged-in user.   
+class AllRecordsFromProjects(generics.ListAPIView):
+    serializer_class = ProjectSerializer
+    queryset = Project.objects.all()
+
 
 # For deatils of projects assigned to the clients.
 class ClientWithProjectDetail(generics.RetrieveAPIView):
