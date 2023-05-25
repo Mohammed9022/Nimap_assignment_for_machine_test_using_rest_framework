@@ -61,6 +61,7 @@ class ProjectCreateView(generics.CreateAPIView):
 # For project details
 class ProjectDetailView(generics.ListAPIView):
     serializer_class = ListProjectSerializer
+    # serializer_class = ProjectSerializer # If we want all the records so uncomment this line and run. 
     queryset = Project.objects.all()
     
 
