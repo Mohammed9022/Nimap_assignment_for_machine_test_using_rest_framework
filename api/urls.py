@@ -10,5 +10,4 @@ urlpatterns=[
     path('project_create/',ProjectCreateView.as_view(),name='project_create'),
     path('project_list/',AllRecordsFromProjects.as_view(),name='project_list'),
     path('project_detail/',ProjectDetailView.as_view(),name='project_detail'),
-    path('clientwith_project/', ClientWithProjectDetail.as_view(),name='clientwith_project'),
 ]

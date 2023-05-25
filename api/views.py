@@ -43,6 +43,7 @@ class DeleteClientView(generics.RetrieveUpdateDestroyAPIView):
 
 
 # API for creating a new project
+#not working properly so I have to first solve this issue and everything is perfectly working.
 class ProjectCreateView(generics.CreateAPIView):
     serializer_class = ProjectSerializer
 
